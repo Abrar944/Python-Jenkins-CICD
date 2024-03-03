@@ -8,7 +8,7 @@ pipeline{
         }   
         stage("build"){
             steps{echo "Building image Stage"
-                sh " docker build -t todoapp ." 
+                sh " docker build -t ahmedbhai/todoapp ." 
                 
             }  
         }
