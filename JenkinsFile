@@ -8,13 +8,9 @@ pipeline{
         }   
         stage("build"){
             steps{echo "Building image Stage"
-                sh " docker build -t todoapp ."
-            
-            
+                sh " docker build -t todoapp ." 
                 
-            }
-            
-            
+            }  
         }
         stage("push-to-docker"){
             steps{
@@ -25,14 +21,12 @@ pipeline{
                 sh "docker push ${env.dockerhubuser}/todoapp:latest"
             }
             }
-            
-            
         }
          stage("deploy"){
              steps{
             echo "Deploying the container"
              sh "docker-compose down && docker-compose up -d"
-            //sh "docker run -d -p 5000:5000 todoapp:latest"
+            //sh "docker run -d -p 5000:5000 diabloexodia/todoapp:latest"
         }
          }
         
