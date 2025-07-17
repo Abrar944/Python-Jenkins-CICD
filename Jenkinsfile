@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        sonarRunner 'SonarScanner'  // 👈 Matches your configured tool name
+    environment {
+        SONAR_SCANNER_HOME = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo "Running SonarQube Analysis"
                 withSonarQubeEnv('MySonar') {
-                    sh 'sonar-scanner'
+                    sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
         }
