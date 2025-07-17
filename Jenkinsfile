@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // Optional: Add DOCKER_HOST if needed
-    }
-
     stages {
         stage("Clone") {
             steps {
