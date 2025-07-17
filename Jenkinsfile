@@ -1,10 +1,13 @@
 pipeline {
     agent any
 
+    tools {
+        sonarRunner 'SonarScanner'  // 👈 Matches your configured tool name
+    }
+
     stages {
         stage("Clone") {
             steps {
-                echo "Cloning Stage"
                 git url: "https://github.com/Abrar944/Python-Jenkins-CICD.git", branch: "main"
             }
         }
@@ -13,7 +16,7 @@ pipeline {
             steps {
                 echo "Running SonarQube Analysis"
                 withSonarQubeEnv('MySonar') {
-                    sh "sonar-scanner"
+                    sh 'sonar-scanner'
                 }
             }
         }
@@ -27,7 +30,7 @@ pipeline {
 
         stage("Deploy with Docker Compose") {
             steps {
-                echo "Deploying Application"
+                echo "Deploying the container"
                 sh "docker-compose down && docker-compose up -d"
             }
         }
